@@ -10,7 +10,7 @@ class ErrorHandler:
         self.report(line, "", message)
 
     def error_on_token(self, token, message):
-        if token.type == TokenType.EOF:
+        if token.type_ == TokenType.EOF:
             self.report(toke.line, "at end", message)
         else:
             self.report(token.line, f" at '{token.lexeme}'", message)
