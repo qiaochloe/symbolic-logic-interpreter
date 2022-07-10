@@ -10,7 +10,7 @@ class Literal(Expr):
         return visitor.visit_literal_expr(self)
 
     def __str__(self):
-        return f"{self.value}"
+        return f"(LITERAL: {self.value})"
 
 
 class Unary(Expr):
@@ -22,7 +22,7 @@ class Unary(Expr):
         return visitor.visit_unary_expr(self)
 
     def __str__(self):
-        return f"{self.operator} {self.right}"
+        return f"(UNARY: {self.operator} {self.right})"
 
 
 class Binary(Expr):
@@ -35,7 +35,7 @@ class Binary(Expr):
         return visitor.visit_binary_expr(self)
 
     def __str__(self):
-        return f"{self.left} {self.operator} {self.right}"
+        return f"(BINARY: {self.left} {self.operator} {self.right})"
 
 
 class Grouping(Expr):
@@ -46,4 +46,4 @@ class Grouping(Expr):
         return visitor.visit_grouping_expr(self)
 
     def __str__(self):
-        return f"({self.expression})"
+        return f"(GROUP: {self.expression})"

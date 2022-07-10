@@ -10,4 +10,4 @@ class Expression(Stmt):
         return visitor.visit_expression_stmt(self)
 
     def __str__(self):
-        return f"{self.expr}"
+        return f"(STATEMENT: {self.expr})"
