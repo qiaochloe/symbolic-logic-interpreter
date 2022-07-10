@@ -17,7 +17,8 @@ class Interpreter(Visitor):
     def interpret(self, statements):
         try:
             for statement in statements:
-                self.evaluate(statement.expr)
+                value = self.evaluate(statement.expr)
+                return value
         except LoxRunTimeError as error:
             self.error_handler.runtime_error(error)
 
@@ -25,7 +26,8 @@ class Interpreter(Visitor):
         expr = self.evaluate(stmt.expr)
 
     def visit_literal_expr(self, expr):
-        return expr.value
+        return False
+        # return expr.value
 
     def visit_grouping_expr(self, expr):
         return self.evaluate(expr.expression)
@@ -57,14 +59,17 @@ class Interpreter(Visitor):
 
 
 error = ErrorHandler()
+
 a = Scanner(error, "M \land (E \lor D)")
 a_tokens = a.scan_tokens()
-b = Parser(a_tokens, error)
+for token in a_tokens:
+    print(token)
 
-b_terms = b.parse()
-for term in b_terms:
-    print(term)
+b = Parser(a_tokens, error)
+b_expr = b.parse()
+for expr in b_expr:
+    print(expr)
 
 print("Start!")
 interp = Interpreter(error)
-print(interp.interpret(b_terms))
+print(interp.interpret(b_expr))
