@@ -41,12 +41,12 @@ class Parser:
                 return True
         return False
 
-    # expression -> term
+    # expression -> binary
     def expression(self):
-        return self.term()
+        return self.binary()
 
-    # term -> unary (("\land" | "\lor" | "\limplies" | "\equiv") unary)* ;
-    def term(self):
+    # binary -> unary (("\land" | "\lor" | "\limplies" | "\equiv") unary)* ;
+    def binary(self):
         expr = self.unary()
         if self.match(  # not while
             TokenType.AND, TokenType.OR, TokenType.IMPLIES, TokenType.EQUIV
@@ -99,13 +99,3 @@ class Parser:
     def error(self, token, message):
         self.error_handler.error_on_token(token, message)
         # return ParseError("")
-
-
-# error = ErrorHandler()
-# a = Scanner(error, "M \land (E \lor D)")
-# a_tokens = a.scan_tokens()
-# b = Parser(a_tokens, error)
-
-# b_terms = b.parse()
-# for term in b_terms:
-#    print(term)
