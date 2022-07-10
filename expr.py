@@ -31,7 +31,7 @@ class Binary(Expr):
         self.operator = operator
         self.right = right
 
-    def accept(selef, visitor):
+    def accept(self, visitor):
         return visitor.visit_binary_expr(self)
 
     def __str__(self):
