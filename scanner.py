@@ -100,9 +100,3 @@ class Scanner:
     #            return True
 
     #    return False
-
-
-error = ErrorHandler()
-a = Scanner(error, "M \land (E \lor D)")
-for token in a.scan_tokens():
-    print(token.type_)

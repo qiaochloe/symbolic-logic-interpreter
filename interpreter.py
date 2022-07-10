@@ -58,18 +58,25 @@ class Interpreter(Visitor):
         return expr.accept(self)
 
 
-error = ErrorHandler()
+def main(expression):
+    error = ErrorHandler()
+    print(f"Expression: {expression}")
 
-a = Scanner(error, "M \land (E \lor D)")
-a_tokens = a.scan_tokens()
-for token in a_tokens:
-    print(token)
+    print("\nScanner:")
+    a = Scanner(error, expression)
+    a_tokens = a.scan_tokens()
+    for token in a_tokens:
+        print(token)
 
-b = Parser(a_tokens, error)
-b_expr = b.parse()
-for expr in b_expr:
-    print(expr)
+    print("\nParser:")
+    b = Parser(a_tokens, error)
+    b_expr = b.parse()
+    for expr in b_expr:
+        print(expr)
 
-print("Start!")
-interp = Interpreter(error)
-print(interp.interpret(b_expr))
+    print("\nInterpreter:")
+    interp = Interpreter(error)
+    print(interp.interpret(b_expr))
+
+
+main("M \land (E \lor D)")
