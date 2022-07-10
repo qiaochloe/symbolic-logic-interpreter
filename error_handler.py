@@ -11,9 +11,15 @@ class ErrorHandler:
 
     def error_on_token(self, token, message):
         if token.type_ == TokenType.EOF:
-            self.report(toke.line, "at end", message)
+            self.report(token.line, "at end", message)
         else:
             self.report(token.line, f" at '{token.lexeme}'", message)
+
+    def runtime_error(self, error):
+        print(
+            f"[line {error.token.line}] Error at '{error.token.lexeme}' : {str(error)}"
+        )
+        self.had_runtime_error = True
 
     def report(self, line, where, message):
         print(f"[line {line}] Error {where}: {message}")
